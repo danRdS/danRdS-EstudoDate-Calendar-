@@ -31,23 +31,24 @@ public class TreinoBoleto {
 		Calendar cal2 = Calendar.getInstance();
 		cal2.setTime(d2);
 		
+		System.out.println("Data de emissão: " + sdf.format(d));
+		
 		System.out.print("Vence em quantos dias? ");
 		int x = sc.nextInt();
 
-		System.out.println("Data de emissão: " + sdf.format(d));
-		
 		cal.add(Calendar.DAY_OF_YEAR, x);
 		
 		System.out.println("Juros");
 			System.out.print("Quantos dias para incidência de juros? ");
 			int j = sc.nextInt();
 			double juros = 0;
+			double porcentagem = 0;
 			cal1.add(Calendar.DAY_OF_YEAR, x + j);
 			if(j > 0) {
-			System.out.print("Qual o valor do juros? R$");
-			juros = sc.nextDouble();
+			System.out.print("Qual o valor do juros? (%)");
+			porcentagem = sc.nextDouble();
 			System.out.println("J");
-			juros = 0 + juros;
+			juros = price * (porcentagem/100);
 			}
 
 		d = cal.getTime();
@@ -57,7 +58,8 @@ public class TreinoBoleto {
 		System.out.println("Vencimento: " + sdf.format(d));
 		if(d1.after(d)) {
 			System.out.println("Inicio da taxa de juros: " + sdf.format(d1));
-			System.out.printf("Juros de R$%.2f ao dia%n", juros);
+			System.out.println("Juros de " + porcentagem + "% ao dia");
+			System.out.printf("(Total de R$%.2f ao dia)%n", juros);
 			}
 		
 		System.out.println();
